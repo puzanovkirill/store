@@ -1,11 +1,11 @@
 import React from 'react';
 import { ChakraProvider } from "@chakra-ui/react"
-import Navbar from "../components/Navbar";
+import Navbar from "./components/Navbar.js";
 
 function App() {
   return (
     <ChakraProvider>
-      <Navbar/>
+        <Navbar/>
     </ChakraProvider>
   );
 }
