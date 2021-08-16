@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Container, Link, List, ListItem} from "@chakra-ui/react";
+import {Box, Container, Link} from "@chakra-ui/react";
 import {BrowserRouter, NavLink} from "react-router-dom";
 import { AiOutlineHome, AiOutlineShoppingCart, AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import {CART_ROUTE, HOME_ROUTE, LOGIN_ROUTE} from "../utils/consts";
