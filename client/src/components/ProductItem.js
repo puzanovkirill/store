@@ -9,12 +9,13 @@ const ProductItem = () => {
     return (
         <Box
             w='300px'
-            h='350px'
-            mt='20px'
-            onClick={() => history.push(`${PRODUCT_ROUTE}/id`)}
+            minH='350px'
+            onClick={() => history.push(`${PRODUCT_ROUTE}`)}
+            shadow='lg'
+            borderRadius='lg'
         >
-            <Image src={img} w='250px' h='250px'/>
-            <Box d='flex' flexDirection='column'>
+            <Image src={img} w='250px' h='250px' m='auto'/>
+            <Box d='flex' flexDirection='column' textAlign='center'>
                 <Box>Price</Box>
                 <Box>Name</Box>
             </Box>
