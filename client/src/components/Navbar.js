@@ -1,19 +1,19 @@
-import React from 'react';
-import {Box, Container, Image, Link} from "@chakra-ui/react";
+import React, {useContext} from 'react';
+import {Box, Container, Link} from "@chakra-ui/react";
 import {BrowserRouter, NavLink} from "react-router-dom";
-import { AiOutlineHome, AiOutlineShoppingCart, AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
+import {AiOutlineShoppingCart, AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import {CART_ROUTE, HOME_ROUTE, LOGIN_ROUTE} from "../utils/consts";
+import {Context} from "../index";
 
 const Navbar = () => {
-
-    const isAuth = true;
+    const {userStore} = useContext(Context);
     return (
         <Box bg="#805AD5" w="100%" p={4} color="white" >
             <Container maxW="container.xl" >
                 <Box d='flex' justifyContent='space-between' alignItems='center'>
                     <BrowserRouter>
                         <Box>
-                            <Link as={NavLink} to={HOME_ROUTE}>
+                            <NavLink to={HOME_ROUTE}>
                                 <Box
                                     textTransform='uppercase'
                                     letterSpacing='10px'
@@ -21,9 +21,9 @@ const Navbar = () => {
                                 >
                                     Online store
                                 </Box>
-                            </Link>
+                            </NavLink>
                         </Box>
-                            {isAuth ?
+                            {userStore.isAuth ?
                                 <Box d='flex' flexDirection='row'>
                                     <Link mr='30px' as={NavLink} to={CART_ROUTE}>
                                         <AiOutlineShoppingCart style={{width:30, height: 30}}/>

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Box, Input, InputGroup, Select, InputLeftAddon} from "@chakra-ui/react";
 import {AiOutlineSearch} from "react-icons/ai";
 import {MdAddShoppingCart} from "react-icons/all";
+import {Context} from "../index";
 
 const Filter = () => {
+    const {productStore} = useContext(Context);
+    console.log(productStore);
     return (
         <Box d='flex' w='100%' justifyContent='space-around'>
             <Box d='flex'>
@@ -13,16 +16,14 @@ const Filter = () => {
                 </InputGroup>
             </Box>
             <Select placeholder='Choose type' ml='50px' w='300px' style={{cursor: 'pointer'}}>
-                <option value='option1'>some option</option>
-                <option value='option2'>some option</option>
-                <option value='option3'>some option</option>
-                <option value='option4'>some option</option>
+                {productStore.types.map(type =>
+                    <option key={type.id}>{type.name}</option>
+                )}
             </Select>
             <Select placeholder='Choose brand' ml='50px' w='300px' style={{cursor: 'pointer'}}>
-                <option value='option1'>some option</option>
-                <option value='option2'>some option</option>
-                <option value='option3'>some option</option>
-                <option value='option4'>some option</option>
+                {productStore.brands.map(brand =>
+                    <option key={brand.id}>{brand.name}</option>
+                )}>
             </Select>
         </Box>
     );
