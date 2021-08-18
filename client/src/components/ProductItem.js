@@ -10,7 +10,7 @@ const ProductItem = ({product}) => {
         <Box
             w='300px'
             minH='350px'
-            onClick={() => history.push(`${PRODUCT_ROUTE}`)}
+            onClick={() => history.push(`${PRODUCT_ROUTE}/${product.id}`)}
             shadow='lg'
             borderRadius='lg'
         >

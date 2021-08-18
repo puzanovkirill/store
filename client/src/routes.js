@@ -29,7 +29,7 @@ export const publicRoutes = [
     },
 
     {
-        path: PRODUCT_ROUTE,
+        path: PRODUCT_ROUTE + '/:id',
         Component: Product
     }
 ]
