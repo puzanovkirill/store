@@ -1,13 +1,13 @@
 import React, {useContext} from 'react';
 import {Switch, Route, BrowserRouter, Redirect} from "react-router-dom";
 import {authRoutes, publicRoutes} from "../routes";
-import {HOME_ROUTE, LOGIN_ROUTE} from "../utils/consts";
+import {HOME_ROUTE} from "../utils/consts";
 import {Context} from "../index";
 
 const AppRouter = () => {
     const {userStore} = useContext(Context);
+    console.log(authRoutes);
     return (
-        <BrowserRouter>
             <Switch>
                 {userStore.isAuth && authRoutes.map(({path, Component}) =>
                     <Route key={path} path={path} component={Component} exact/>
@@ -15,9 +15,8 @@ const AppRouter = () => {
                 {publicRoutes.map(({path, Component}) =>
                     <Route key={path} path={path} component={Component} exact/>
                 )};
+                <Redirect to={HOME_ROUTE}/>
             </Switch>
-            <Redirect to={LOGIN_ROUTE}/>
-        </BrowserRouter>
     );
 };
 
