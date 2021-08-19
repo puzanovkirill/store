@@ -25,7 +25,7 @@ const Auth = () => {
                     <Box pb='12px'>{isLogin ?
                         <Box>Don't have an account? <NavLink to={REGISTRATION_ROUTE} style={{color: '#805AD5'}}>Sign up!</NavLink></Box>
                         :
-                        <Box>Have an account? <NavLink to={LOGIN_ROUTE} style={{color: '#805AD5'}}>Sign in</NavLink></Box>}
+                        <Box>Have an account? <NavLink to={LOGIN_ROUTE} style={{color: '#805AD5'}}>Sign in!</NavLink></Box>}
                     </Box>
                 </FormControl>
             </Container>

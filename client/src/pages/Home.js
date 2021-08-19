@@ -17,7 +17,6 @@ const Home = () => {
                     {productStore.products.map(product =>
                         <ProductItem key={product.id} product={product}/>
                     )}
-
                 </Grid>
             </Center>
         </Container>

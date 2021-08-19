@@ -28,7 +28,7 @@ const Navbar = () => {
                                         <AiOutlineShoppingCart style={{width:30, height: 30}}
                                         />
                                     </Link>
-                                    <Link as={NavLink} to={LOGIN_ROUTE}>
+                                    <Link as={NavLink} to={LOGIN_ROUTE} onClick={() => userStore.setIsAuth(false)}>
                                         <AiOutlineLogout style={{width: 30, height: 30}}/>
                                     </Link>
                                 </Box>

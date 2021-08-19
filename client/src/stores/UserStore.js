@@ -1,7 +1,9 @@
 export default class UserStore{
     constructor() {
         this._isAuth = true;
-        this._currentUser = {};
+        this._currentUser = {
+            email: 'mail.mail.com'
+        };
     }
 
     setIsAuth(bool){
