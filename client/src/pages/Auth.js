@@ -13,9 +13,18 @@ const Auth = () => {
                 minH    ='300px'
                 shadow='lg'
                 borderRadius='lg'
-                mt='100px'
-            >
-                <FormControl d='grid' gridTemplateColumns='repeat(1, 1fr)' gridGap={3}>
+                mt={
+                    {
+                        xl: '100px',
+                        md: '60px',
+                        lg: '100px',
+                        sm:'40px',
+                        base: '10px'
+                    }
+                }
+                    >
+                    <FormControl
+                 d='grid' gridTemplateColumns='repeat(1, 1fr)' gridGap={3}>
                         <Heading textAlign='center'>{isLogin ? 'Login' : 'Registration'}</Heading>
                         <FormLabel>Email address</FormLabel>
                         <Input type="email" />

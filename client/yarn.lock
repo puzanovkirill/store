@@ -1677,7 +1677,7 @@
     "@chakra-ui/form-control" "1.4.0"
     "@chakra-ui/utils" "1.8.2"
 
-"@chakra-ui/theme-tools@1.1.9":
+"@chakra-ui/theme-tools@^1.1.9", "@chakra-ui/theme-tools@1.1.9":
   "integrity" "sha512-nul8TE6EUzubaOS6B1bwy6IQvUlRjhI1vJtsoyxlOkyscFY6BMJzWIVDaO7wKwsc/nwF+fkNITF40p3AmG3Usw=="
   "resolved" "https://registry.npmjs.org/@chakra-ui/theme-tools/-/theme-tools-1.1.9.tgz"
   "version" "1.1.9"
