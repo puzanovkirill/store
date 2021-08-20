@@ -8,7 +8,9 @@ export default class CartStore{
     }
 
     deleteProduct(id){
-        this._ids.splice(this._ids.indexOf(id),1);
+        return this._ids = this._ids.filter(item => {
+            return item !== id;
+        });
     }
 
     get ids(){

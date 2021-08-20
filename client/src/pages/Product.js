@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Box, Button, Container, Divider, Heading, Image} from "@chakra-ui/react";
 import img from '../assets/default-product.png';
 import {MdAddShoppingCart} from "react-icons/all";
+import {Context} from "../index";
 
 const Product = () => {
+    const {cartStore} = useContext(Context);
     return (
         <Container maxW="container.xl" p='40px'>
             <Box d='flex' justifyContent='space-between'>
@@ -27,6 +29,7 @@ const Product = () => {
                         variant="solid"
                         w='150px'
                         mt='30px'
+                        onClick={() => {cartStore.addProduct(3); console.log(cartStore.ids)}}
                     >
                         Add to cart
                     </Button>
