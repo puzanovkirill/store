@@ -13,6 +13,12 @@ const ProductItem = ({product}) => {
             onClick={() => history.push(`${PRODUCT_ROUTE}/${product.id}`)}
             shadow='lg'
             borderRadius='lg'
+            cursor='pointer'
+            transition='all 0.3s'
+            _hover={{
+                transform: 'translateY(-15px)'
+            }
+            }
         >
             <Image src={img} w='250px' h='250px' m='auto'/>
             <Box d='flex' flexDirection='column' textAlign='center'>

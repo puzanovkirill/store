@@ -34,7 +34,11 @@ const Cart = () => {
                                     )}
                                 </Box>
                                 <Button
-                                    onClick={() => { setCartStoreState(cartStore.deleteProduct(id)); console.log(cartStore.ids);}}
+                                    onClick={() => {
+                                        setCartStoreState(cartStore.deleteProduct(id));
+                                        console.log(cartStore.ids);
+                                        }
+                                    }
                                 >
                                     <FiDelete/>
                                 </Button>
