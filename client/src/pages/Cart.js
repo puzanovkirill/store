@@ -5,9 +5,10 @@ import {Context} from "../index";
 const Cart = () => {
     const {userStore} = useContext(Context);
     const {productStore} = useContext(Context);
+    const {cartStore} = useContext(Context);
     let sum = 0;
-    productStore.products.map(product =>
-            sum += parseInt(product.price)
+    cartStore.ids.map(id =>
+            sum += parseInt(productStore.products[id].price)
         );
     return (
         <Container maxW='container.xl' mt='20px'>
@@ -16,14 +17,14 @@ const Cart = () => {
             </Heading>
             <Box d='flex' flexDirection='column'>
                 <OrderedList mt='20px'>
-                    {productStore.products.map(product =>
-                        <ListItem fontSize='2em' key={product.id} mt='10px'>
+                    {cartStore.ids.map(id =>
+                        <ListItem fontSize='2em' key={id} mt='10px'>
                             <Box d='flex' justifyContent='space-between'>
                                 <Box>
-                                    {product.name}
+                                    {productStore.products[id].name}
                                 </Box>
                                 <Box>
-                                    {product.price} rub.
+                                    {productStore.products[id].price} rub.
                                 </Box>
                             </Box>
                             <Divider mt='10px'/>
