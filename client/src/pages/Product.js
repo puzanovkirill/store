@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {Box, Button, Container, Divider, Heading, Image, useToast} from "@chakra-ui/react";
 import img from '../assets/default-product.png';
 import {MdAddShoppingCart} from "react-icons/all";
@@ -7,6 +7,7 @@ import {useParams} from "react-router-dom";
 
 const Product = () => {
     const {cartStore} = useContext(Context);
+    const [cartStoreState, setCartStoreState] = useState(cartStore);
     const {productStore} = useContext(Context);
     const {id} = useParams();
     const toast = useToast();
@@ -49,8 +50,9 @@ const Product = () => {
                         w='150px'
                         mt='30px'
                         onClick={() => {
-                            cartStore.addProduct(parseInt(id));
-                            showToast()
+                            setCartStoreState(cartStore.addProduct(parseInt(id)));
+                            console.log(cartStore.ids);
+                            showToast();
                             }
                         }
                     >

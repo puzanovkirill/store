@@ -11,11 +11,13 @@ export default class ProductStore{
             {id:3, name:'Xiaomi'}
         ];
         this._products = [
-            {id: 1, name: 'name1', price: 111111 },
-            {id: 2, name: 'name2', price: 111111 },
-            {id: 3, name: 'name3', price: 111111 },
-            {id: 4, name: 'name4', price: 111111 },
-            {id: 5, name: 'name5', price: 111111 },
+            {id: 0, name: 'name1', price: 111111 },
+            {id: 1, name: 'name2', price: 111111 },
+            {id: 2, name: 'name3', price: 111111 },
+            {id: 3, name: 'name4', price: 111111 },
+            {id: 4, name: 'name5', price: 111111 },
+            {id: 5, name: 'name6', price: 111111 },
+            {id: 6, name: 'name7', price: 111111 },
         ];
         this._selectedType = {};
         this._selectedBrand = {};

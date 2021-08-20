@@ -4,7 +4,7 @@ export default class CartStore{
     }
 
     addProduct(id) {
-        this._ids.push(id);
+       return this._ids.push(id);
     }
 
     deleteProduct(id){
