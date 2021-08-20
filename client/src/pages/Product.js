@@ -1,20 +1,39 @@
 import React, {useContext} from 'react';
-import {Box, Button, Container, Divider, Heading, Image} from "@chakra-ui/react";
+import {Box, Button, Container, Divider, Heading, Image, useToast} from "@chakra-ui/react";
 import img from '../assets/default-product.png';
 import {MdAddShoppingCart} from "react-icons/all";
 import {Context} from "../index";
+import {useParams} from "react-router-dom";
 
 const Product = () => {
     const {cartStore} = useContext(Context);
+    const {productStore} = useContext(Context);
+    const {id} = useParams();
+    const toast = useToast();
+    const showToast = () => {
+        toast({
+            title: "Product added.",
+            description: "Product added to your cart.",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+        })
+    }
     return (
         <Container maxW="container.xl" p='40px'>
             <Box d='flex' justifyContent='space-between'>
                 <Image src={img}/>
                 <Box>
                     <Heading fontSize='4em'>
-                        Name of product
+                        {productStore.products.map(product =>
+                            product.id.toString() === id.toString() ? product.name : ''
+                        )}
                     </Heading>
-                    <Box fontSize='3em' mt='50px'>Price of product</Box>
+                    <Box fontSize='3em' mt='50px'>
+                        {productStore.products.map(product =>
+                            product.id.toString() === id.toString() ? `${product.price} rub.` : ''
+                        )}
+                    </Box>
                     <Divider mt='50px'/>
                     <Box mt='50px' fontSize='2em'>
                         <Box>Some additional info</Box>
@@ -29,7 +48,11 @@ const Product = () => {
                         variant="solid"
                         w='150px'
                         mt='30px'
-                        onClick={() => {cartStore.addProduct(3); console.log(cartStore.ids)}}
+                        onClick={() => {
+                            cartStore.addProduct(parseInt(id));
+                            showToast()
+                            }
+                        }
                     >
                         Add to cart
                     </Button>
