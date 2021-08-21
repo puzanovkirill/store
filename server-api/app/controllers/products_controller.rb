@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
   def index
     @products = Product.all
@@ -12,6 +14,6 @@ class ProductsController < ApplicationController
   private
 
   def properties
-    { properties: { except: [:created_at, :updated_at, :product_id] } }
+    { properties: { except: %i[created_at updated_at product_id] } }
   end
 end
