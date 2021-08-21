@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :categories, only: %i[index show]
-  resources :products, only: %i[index show] do
-    resources :properties, only: []
+  scope path: '/api' do
+    resources :categories, only: %i[index show]
+    resources :products, only: %i[index show] do
+      resources :properties, only: []
+    end
   end
 end
