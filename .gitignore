@@ -10,7 +10,7 @@ dist
 *.log
 
 .env*.local
-
+/server-api/.env
 db/*.sqlite3
 db/*.sqlite3-*
 server-api/log/*
