@@ -3,6 +3,7 @@
 class UsersController < ApplicationController
   def create
     user = User.create!(user_params)
+    Cart.create(user_id: user.id)
     auth_token = AuthenticateUser.new(user.email, user.password).call
     json_response obj: { token: auth_token }, status: :created
   end
