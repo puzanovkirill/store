@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     end
     post 'sign-up', to: 'users#create'
     post 'login', to: 'auth#authenticate'
+    get 'cart', to: 'cart#index'
   end
 end
