@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     resources :products, only: %i[index show] do
       resources :properties, only: []
     end
+    post 'sign-up', to: 'users#create'
+    post 'login', to: 'auth#authenticate'
   end
 end
