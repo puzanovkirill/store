@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CartController < ApplicationController
   before_action :authorize_request
 
@@ -20,7 +22,7 @@ class CartController < ApplicationController
 
   def cart_res
     {
-      products: current_user.cart.cart_items.map { |item| item.product_id },
+      products: current_user.cart.cart_items.map(&:product_id),
       total: current_user.cart.cart_items.reduce(0) { |sum, item| sum + item.product.price }
     }
   end

@@ -26,9 +26,9 @@ Property.create(name: 'Brand', value: 'Apple', product_id: macbook.id)
 Property.create(name: 'Brand', value: 'Huawei', product_id: matebook.id)
 
 kumma = User.create(first_name: 'Kirill', last_name: 'Kumma', email: 'kirill@kumma.com', password: '123123',
-            password_confirmation: '123123')
+                    password_confirmation: '123123')
 puzanov = User.create(first_name: 'Kirill', last_name: 'Puzanov', email: 'kirill@puzanov.com', password: '123123',
-            password_confirmation: '123123')
+                      password_confirmation: '123123')
 
 Cart.create(user_id: kumma.id)
 Cart.create(user_id: puzanov.id)
