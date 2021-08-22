@@ -7,6 +7,7 @@ import {LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
 const Auth = () => {
     const location = useLocation();
     const isLogin = location.pathname === LOGIN_ROUTE;
+    const {userStore} = useContext(Context);
     return (
             <Container
                 maxW="container.md"
@@ -30,7 +31,13 @@ const Auth = () => {
                         <Input type="email" />
                         <FormLabel>Password</FormLabel>
                         <Input type='password'/>
-                        <Button>{isLogin ? 'Sign in' : 'Sign up '}</Button>
+                        <Button
+                            onClick={() => {
+
+                            }}
+                        >
+                            {isLogin ? 'Sign in' : 'Sign up '}
+                        </Button>
                     <Box pb='12px'>{isLogin ?
                         <Box>Don't have an account? <NavLink to={REGISTRATION_ROUTE} style={{color: '#805AD5'}}>Sign up!</NavLink></Box>
                         :
