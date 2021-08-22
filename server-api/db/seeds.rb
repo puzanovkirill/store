@@ -4,6 +4,7 @@ Category.destroy_all
 Product.destroy_all
 Property.destroy_all
 User.destroy_all
+Cart.destroy_all
 
 phones = Category.create(name: 'Phones')
 laptops = Category.create(name: 'Laptops')
@@ -24,7 +25,10 @@ Property.create(name: 'Color', value: 'Silver', product_id: matebook.id)
 Property.create(name: 'Brand', value: 'Apple', product_id: macbook.id)
 Property.create(name: 'Brand', value: 'Huawei', product_id: matebook.id)
 
-User.create(first_name: 'Kirill', last_name: 'Kumma', email: 'kirill@kumma.com', password: '123123',
+kumma = User.create(first_name: 'Kirill', last_name: 'Kumma', email: 'kirill@kumma.com', password: '123123',
             password_confirmation: '123123')
-User.create(first_name: 'Kirill', last_name: 'Puzanov', email: 'kirill@puzanov.com', password: '123123',
+puzanov = User.create(first_name: 'Kirill', last_name: 'Puzanov', email: 'kirill@puzanov.com', password: '123123',
             password_confirmation: '123123')
+
+Cart.create(user_id: kumma.id)
+Cart.create(user_id: puzanov.id)
