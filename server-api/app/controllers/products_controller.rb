@@ -3,17 +3,11 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all
-    json_response obj: @products, include: properties
+    render json: @products
   end
 
   def show
     @product = Product.find(params[:id])
-    json_response obj: @product, include: properties
-  end
-
-  private
-
-  def properties
-    { properties: { except: %i[created_at updated_at product_id] } }
+    json_response obj: @product
   end
 end
