@@ -3,7 +3,7 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all
-    render json: @products
+    json_response obj: @products
   end
 
   def show

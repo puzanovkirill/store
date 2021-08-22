@@ -13,6 +13,7 @@ gem 'bcrypt'
 gem 'dotenv-rails'
 gem 'jwt'
 gem 'pg'
+gem 'rack-cors'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 
