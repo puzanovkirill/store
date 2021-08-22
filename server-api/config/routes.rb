@@ -9,5 +9,7 @@ Rails.application.routes.draw do
     post 'sign-up', to: 'users#create'
     post 'login', to: 'auth#authenticate'
     get 'cart', to: 'cart#index'
+    post 'cart/add-item', to: 'cart#add_item'
+    post 'cart/remove-item', to: 'cart#remove_item'
   end
 end
