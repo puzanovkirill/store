@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuthController < ApplicationController
   def authenticate
     auth_token = AuthenticateUser.new(auth_params[:email], auth_params[:password]).call

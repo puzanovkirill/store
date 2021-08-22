@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuthorizeRequest
   def initialize(headers = {})
     @headers = headers
@@ -22,9 +24,8 @@ class AuthorizeRequest
   end
 
   def encoded_token
-    if headers['Authorization'].present?
-      return headers['Authorization'].split(' ').last
-    end
-      raise(ExceptionHandler::MisingToken, Message.missing_token)
+    return headers['Authorization'].split(' ').last if headers['Authorization'].present?
+
+    raise(ExceptionHandler::MisingToken, Message.missing_token)
   end
 end
