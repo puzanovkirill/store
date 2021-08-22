@@ -24,7 +24,7 @@ class AuthorizeRequest
   end
 
   def encoded_token
-    return headers['Authorization'].split(' ').last if headers['Authorization'].present?
+    return headers['Authorization'].split.last if headers['Authorization'].present?
 
     raise(ExceptionHandler::MissingToken, Message.missing_token)
   end
