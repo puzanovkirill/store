@@ -5,6 +5,11 @@ class ApplicationController < ActionController::API
   include ExceptionHandler
 
   before_action :params_to_snake_case
+  attr_reader :current_user
+
+  def authorize_request
+    @current_user = (AuthorizeRequest.new(request.headers).call)[:user]
+  end
 
   private
 

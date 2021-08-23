@@ -10,15 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2021_08_21_174223) do
 
+=======
+ActiveRecord::Schema.define(version: 20_210_822_112_449) do
+>>>>>>> 804f9162ec00fdcebcb9c81ebd6a75b9e9c26184
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+=======
+  create_table 'cart_items', force: :cascade do |t|
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'cart_id'
+    t.bigint 'product_id'
+    t.index ['cart_id'], name: 'index_cart_items_on_cart_id'
+    t.index ['product_id'], name: 'index_cart_items_on_product_id'
+  end
+
+  create_table 'carts', force: :cascade do |t|
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'user_id'
+    t.index ['user_id'], name: 'index_carts_on_user_id'
+  end
+
+  create_table 'categories', force: :cascade do |t|
+    t.string 'name'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+>>>>>>> 804f9162ec00fdcebcb9c81ebd6a75b9e9c26184
   end
 
   create_table "products", force: :cascade do |t|
@@ -48,6 +75,14 @@ ActiveRecord::Schema.define(version: 2021_08_21_174223) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+<<<<<<< HEAD
   add_foreign_key "products", "categories"
   add_foreign_key "properties", "products"
+=======
+  add_foreign_key 'cart_items', 'carts'
+  add_foreign_key 'cart_items', 'products'
+  add_foreign_key 'carts', 'users'
+  add_foreign_key 'products', 'categories'
+  add_foreign_key 'properties', 'products'
+>>>>>>> 804f9162ec00fdcebcb9c81ebd6a75b9e9c26184
 end
