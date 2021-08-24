@@ -5,6 +5,8 @@ import {NavLink, useHistory, useLocation} from "react-router-dom";
 import {HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
 import {useUser} from "../stores/UserStore";
 import {login, registration} from "../http/userAPI";
+import {useCart} from "../stores/CartStore";
+import {fetchCartItems} from "../http/cartAPI";
 
 const Auth = () => {
     const location = useLocation();
@@ -16,6 +18,8 @@ const Auth = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
+    const [cart, setCart] = useCart();
+
 
     const [user, setUser] = useUser();
 
@@ -25,7 +29,9 @@ const Auth = () => {
             data =await login(email, password) :
             data = await registration(firstName, lastName, email, password, passwordConfirmation)
         setUser(data);
-        history.push(HOME_ROUTE);
+        setCart(fetchCartItems());
+        console.log(cart);
+        // history.push(HOME_ROUTE);
     }
 
     return (
