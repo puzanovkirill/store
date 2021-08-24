@@ -2,21 +2,23 @@ import React, {useContext, useState} from 'react';
 import {Box, Button, Container, Divider, Heading, ListItem, OrderedList} from "@chakra-ui/react";
 import {Context} from "../index";
 import {FiDelete} from 'react-icons/fi';
+import {useUser} from "../stores/UserStore";
 
 const Cart = () => {
-    const {userStore} = useContext(Context);
     const {productStore} = useContext(Context);
     const {cartStore} = useContext(Context);
     const [cartStoreState, setCartStoreState] = useState(cartStore);
+    const [user, setUser] = useUser();
     console.log(cartStore);
     let sum = 0;
-    cartStore.ids.map(id =>
-            sum += parseInt(productStore.products[id].price)
-        );
+    // cartStore.ids.map(id =>
+    //         sum += parseInt(productStore.products[id].price)
+    //     );
+    console.log(user);
     return (
         <Container maxW='container.xl' mt='20px'>
             <Heading>
-                User: {userStore.currentUser.email}
+                User: {user.first_name} {user.last_name}
             </Heading>
             <Box d='flex' flexDirection='column'>
                 <OrderedList mt='20px'>

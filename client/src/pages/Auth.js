@@ -4,18 +4,26 @@ import {Context} from "../index";
 import {NavLink, useHistory, useLocation} from "react-router-dom";
 import {HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
 import {useUser} from "../stores/UserStore";
-import {login} from "../http/userAPI";
+import {login, registration} from "../http/userAPI";
 
 const Auth = () => {
     const location = useLocation();
     const history = useHistory();
     const isLogin = location.pathname === LOGIN_ROUTE;
+
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordConfirmation, setPasswordConfirmation] = useState('');
+
     const [user, setUser] = useUser();
 
-    const handleSubmit = async () => {
-        const data = await login(email, password);
+    const handleClick = async () => {
+        let data;
+        isLogin ?
+            data =await login(email, password) :
+            data = await registration(firstName, lastName, email, password, passwordConfirmation)
         setUser(data);
         history.push(HOME_ROUTE);
     }
@@ -39,6 +47,23 @@ const Auth = () => {
                     <FormControl
                  d='grid' gridTemplateColumns='repeat(1, 1fr)' gridGap={3}>
                         <Heading textAlign='center'>{isLogin ? 'Login' : 'Registration'}</Heading>
+                        {isLogin ? '' :
+                            <Box d='flex' justifyContent='space-between'>
+                                <Box w='45%'>
+                                    <FormLabel>First Name</FormLabel>
+                                    <Input type='text'
+                                           onChange={e => setFirstName(e.target.value)}
+                                    />
+                                </Box>
+                                <Box w='45%'>
+                                    <FormLabel>Last Name</FormLabel>
+                                    <Input type='text'
+                                           onChange={e => setLastName(e.target.value)}
+                                    />
+                                </Box>
+                            </Box>
+
+                        }
                         <FormLabel>Email address</FormLabel>
                         <Input type="email"
                                onChange={e => setEmail(e.target.value)}
@@ -47,8 +72,16 @@ const Auth = () => {
                         <Input type='password'
                                onChange={e => setPassword(e.target.value)}
                         />
+                        {isLogin ? '' :
+                        <Box>
+                            <FormLabel>Password Confirmation</FormLabel>
+                            <Input type='password'
+                                   onChange={e => setPasswordConfirmation(e.target.value)}
+                            />
+                        </Box>
+                        }
                         <Button
-                            onClick={handleSubmit}
+                            onClick={handleClick}
                         >
                             {isLogin ? 'Sign in' : 'Sign up '}
                         </Button>
