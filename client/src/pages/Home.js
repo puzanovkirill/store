@@ -4,12 +4,15 @@ import ProductItem from "../components/ProductItem";
 import Filter from "../components/Filter";
 import {Context} from "../index";
 import {fetchCategories, fetchProducts} from "../http/productAPI";
+import {useProduct} from "../stores/ProductStore";
 
 const Home = () => {
-    const {productStore} = useContext(Context);
-
-    console.log(productStore.products);
-
+    const [product, setProduct] = useProduct();
+    if(!product){
+        const data = fetchProducts();
+        console.log(data);
+        setProduct(data);
+    }
     return (
         <Container maxW={{xl: 'container.xl', lg: 'container.lg', md: 'container.md', sm: 'container.sm'}}>
             <Box d='flex' mt='30px'>
@@ -27,9 +30,9 @@ const Home = () => {
                     }
                     gap={6} mt='30px'
                 >
-                    {productStore.products.map(product =>
-                        <ProductItem key={product.id} product={product}/>
-                    )}
+                        {/*{productStore.products.map(product =>*/}
+                        {/*    <ProductItem key={product.id} product={product}/>*/}
+                        {/*)}*/}
                 </Grid>
             </Center>
         </Container>

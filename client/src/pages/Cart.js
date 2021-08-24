@@ -11,13 +11,11 @@ const Cart = () => {
     const {cartStore} = useContext(Context);
     const [user, setUser] = useUser();
 
-
     console.log(cartStore);
     let sum = 0;
     // cartStore.ids.map(id =>
     //         sum += parseInt(productStore.products[id].price)
     //     );
-    console.log(user);
     return (
         <Container maxW='container.xl' mt='20px'>
             <Heading>

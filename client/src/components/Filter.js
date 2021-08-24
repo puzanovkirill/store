@@ -51,9 +51,10 @@ const Filter = () => {
                     }
                 }
             >
-                {productStore.types.map(type =>
-                    <option key={type.id}>{type.name}</option>
-                )}
+                <option>opt1</option>
+                {/*{productStore.types.map(type =>*/}
+                {/*    <option key={type.id}>{type.name}</option>*/}
+                {/*)}*/}
             </Select>
             <Select
                 placeholder='Choose brand'
@@ -73,9 +74,10 @@ const Filter = () => {
                     }
                 }
             >
-                {productStore.brands.map(brand =>
-                    <option key={brand.id}>{brand.name}</option>
-                )}>
+                <option>opt1</option>
+                {/*{productStore.brands.map(brand =>*/}
+                {/*    <option key={brand.id}>{brand.name}</option>*/}
+                {/*)}>*/}
             </Select>
         </Box>
     );

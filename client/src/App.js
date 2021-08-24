@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { ChakraProvider } from "@chakra-ui/react"
 import Navbar from "./components/Navbar.js";
 import AppRouter from "./components/AppRouter";
 import {BrowserRouter} from "react-router-dom";
+import {useProduct} from "./stores/ProductStore";
+import {fetchProducts} from "./http/productAPI";
 
 function App() {
-  return (
+
+    return (
     <ChakraProvider>
         <BrowserRouter>
             <Navbar/>
@@ -13,6 +16,7 @@ function App() {
         </BrowserRouter>
     </ChakraProvider>
   );
+
 }
 
 export default App;

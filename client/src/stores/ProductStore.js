@@ -17,7 +17,7 @@ export const ProductProvider = ({ children }) => {
     );
 };
 
-export function useUser() {
+export function useProduct() {
     return useContext(ProductContext);
 }
 
