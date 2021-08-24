@@ -1,5 +1,4 @@
 import {$authHost, $host} from "./index";
-import jwt_decode from 'jwt-decode';
 
 export const fetchCategories = async () => {
     const {data} = await $host.get('api/categories');
@@ -11,13 +10,12 @@ export const fetchOneCategory = async (id) => {
     return data;
 }
 
-export const fetchProducts = async (categoryId, brandId, page, limit) => {
+export const fetchProducts = async (categoryId, page, limit) => {
     const {data} = await $host.get(
         'api/products',
         {
             params: {
                 categoryId,
-                brandId,
                 page,
                 limit
             }

@@ -1,13 +1,25 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {Box, Button, Container, FormControl, FormLabel, Heading, Input} from "@chakra-ui/react";
 import {Context} from "../index";
 import {NavLink, useHistory, useLocation} from "react-router-dom";
-import {LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
+import {HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
+import {useUser} from "../stores/UserStore";
+import {login} from "../http/userAPI";
 
 const Auth = () => {
     const location = useLocation();
+    const history = useHistory();
     const isLogin = location.pathname === LOGIN_ROUTE;
-    const {userStore} = useContext(Context);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [user, setUser] = useUser();
+
+    const handleSubmit = async () => {
+        const data = await login(email, password);
+        setUser(data);
+        history.push(HOME_ROUTE);
+    }
+
     return (
             <Container
                 maxW="container.md"
@@ -28,13 +40,15 @@ const Auth = () => {
                  d='grid' gridTemplateColumns='repeat(1, 1fr)' gridGap={3}>
                         <Heading textAlign='center'>{isLogin ? 'Login' : 'Registration'}</Heading>
                         <FormLabel>Email address</FormLabel>
-                        <Input type="email" />
+                        <Input type="email"
+                               onChange={e => setEmail(e.target.value)}
+                        />
                         <FormLabel>Password</FormLabel>
-                        <Input type='password'/>
+                        <Input type='password'
+                               onChange={e => setPassword(e.target.value)}
+                        />
                         <Button
-                            onClick={() => {
-
-                            }}
+                            onClick={handleSubmit}
                         >
                             {isLogin ? 'Sign in' : 'Sign up '}
                         </Button>

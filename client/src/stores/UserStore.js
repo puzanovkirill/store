@@ -1,24 +1,23 @@
-export default class UserStore{
-    constructor() {
-        this._isAuth = true;
-        this._currentUser = {
-            email: 'mail.mail.com'
-        };
-    }
+import {createContext, useContext, useMemo, useState} from "react";
 
-    setIsAuth(bool){
-        this._isAuth = bool;
-    }
+const UserContext = createContext();
 
-    setUser(user){
-        this._currentUser = user;
-    }
+export const UserProvider = ({ children }) => {
+    const [user, setUser] =  useState();
+    const contextValue = useMemo(
+        () => [user, setUser],
+        [user, setUser],
+    );
 
-    get isAuth(){
-        return this._isAuth;
-    }
+    return (
+        <UserContext.Provider value={contextValue}>
+            {children}
+        </UserContext.Provider>
+    );
+};
 
-    get currentUser(){
-        return this._currentUser;
-    }
+export function useUser() {
+    return useContext(UserContext);
 }
+
+export default  UserProvider;

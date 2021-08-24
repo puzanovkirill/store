@@ -1,12 +1,14 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Box, Center, Container, Grid} from "@chakra-ui/react";
 import ProductItem from "../components/ProductItem";
 import Filter from "../components/Filter";
 import {Context} from "../index";
-import { createBreakpoints } from "@chakra-ui/theme-tools"
+import {fetchCategories, fetchProducts} from "../http/productAPI";
 
 const Home = () => {
     const {productStore} = useContext(Context);
+
+    console.log(productStore.products);
 
     return (
         <Container maxW={{xl: 'container.xl', lg: 'container.lg', md: 'container.md', sm: 'container.sm'}}>

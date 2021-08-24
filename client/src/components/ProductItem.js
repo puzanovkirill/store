@@ -4,8 +4,11 @@ import img from '../assets/default-product.png';
 import {useHistory} from 'react-router-dom';
 import {PRODUCT_ROUTE} from "../utils/consts";
 
-const ProductItem = ({product}) => {
+const ProductItem = (product) => {
     const history = useHistory();
+
+
+    console.log(product);
     return (
         <Box
             w='300px'
