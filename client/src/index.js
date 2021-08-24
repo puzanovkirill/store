@@ -7,20 +7,21 @@ import {createBreakpoints} from "@chakra-ui/theme-tools";
 import CartStore from "./stores/CartStore";
 import UserProvider from "./stores/UserStore";
 import CartProvider from "./stores/CartStore";
+import ProductProvider from "./stores/ProductStore";
 
 export const Context = createContext(null);
 
 
 ReactDOM.render(
   <Context.Provider value={{
-      productStore: new ProductStore(),
   }}>
-      <CartProvider>
-          <UserProvider>
-            <App />
-          </UserProvider>
-      </CartProvider>
-
+      <ProductProvider>
+          <CartProvider>
+              <UserProvider>
+                  <App />
+              </UserProvider>
+          </CartProvider>
+      </ProductProvider>
   </Context.Provider>,
   document.getElementById('root')
 );
