@@ -31,10 +31,10 @@ const Auth = () => {
             data = await registration(firstName, lastName, email, password, passwordConfirmation);
         setUser(data);
         console.log(user)
-        setCart(fetchCartItems());
-        console.log(cart);
+        fetchCartItems().then(data => setCart(data));
         history.push(HOME_ROUTE);
     }
+    console.log(cart);
 
     return (
             <Container

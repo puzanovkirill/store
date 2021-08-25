@@ -7,6 +7,7 @@ import {useParams} from "react-router-dom";
 import {useProduct} from "../stores/ProductStore";
 import {useUser} from "../stores/UserStore";
 import {useCart} from "../stores/CartStore";
+import {addCartItem} from "../http/cartAPI";
 
 const Product = () => {
     const [product, setProduct] = useProduct();
@@ -42,7 +43,7 @@ const Product = () => {
                     <Box mt='50px' fontSize='2em'>
                         {product.map(product =>{
                             if(product.id.toString() === id.toString()) {
-                                return <Box>{product.properties.map(property => <Box>{property.name}: {property.value}</Box>)}</Box>
+                                return <Box key={product.id}>{product.properties.map(property => <Box>{property.name}: {property.value}</Box>)}</Box>
                             }
                         }
                         )}
@@ -55,7 +56,7 @@ const Product = () => {
                         w='150px'
                         mt='30px'
                         onClick={() => {
-
+                            addCartItem(id).then(data => console.log(data));
                             showToast();
                         }
                         }

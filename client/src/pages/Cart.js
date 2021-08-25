@@ -5,13 +5,15 @@ import {FiDelete} from 'react-icons/fi';
 import {useUser} from "../stores/UserStore";
 import {useCart} from "../stores/CartStore";
 import {fetchCartItems} from "../http/cartAPI";
+import {useProduct} from "../stores/ProductStore";
 
 const Cart = () => {
     const {productStore} = useContext(Context);
-    const {cartStore} = useContext(Context);
+    const [cart ,setCart] = useCart();
     const [user, setUser] = useUser();
+    const [product, setProduct] = useProduct();
+    console.log()
 
-    console.log(cartStore);
     let sum = 0;
     // cartStore.ids.map(id =>
     //         sum += parseInt(productStore.products[id].price)
@@ -23,30 +25,32 @@ const Cart = () => {
             </Heading>
             <Box d='flex' flexDirection='column'>
                 <OrderedList mt='20px'>
-                    {/*{cart.products.map(id =>*/}
-                        <ListItem fontSize='2em' mt='10px'>
-                            <Box d='flex' justifyContent='space-between'>
-                                <Box>
-                                    {/*item name*/}
-                                </Box>
-                                <Box>
-                                {/*item price*/}
-                                </Box>
-                                <Button
-                                    onClick={() => {
-                                        //delete item
-                                        }
-                                    }
-                                >
-                                    <FiDelete/>
-                                </Button>
-                            </Box>
-                            <Divider mt='10px'/>
-                        </ListItem>
-                    {/*)}*/}
+                    {cart.products.map(cartItem =>
+                        product.map(productItem => {
+                            if(productItem.id.toString() === cartItem.toString()){
+                                return <ListItem fontSize='2em'>
+                                    <Box d='flex' justifyContent='space-between' alignItems='center'>
+                                        <Box d='flex' flexDirection='row' justifyContent='space-between' w='90%'>
+                                            <Box>
+                                                {productItem.name}
+                                            </Box>
+                                            <Box>
+                                                {productItem.price} $
+                                            </Box>
+                                        </Box>
+                                        <Button>
+                                            <FiDelete/>
+                                        </Button>
+                                    </Box>
+                                </ListItem>
+                            }
+                        })
+                    )}
                 </OrderedList>
+                <Divider mt='10px'/>
+
                 <Box fontSize='2em' alignSelf='flex-end'>
-                    Total: {sum} rub.
+                    Total: {cart.total} $
                 </Box>
             </Box>
         </Container>
