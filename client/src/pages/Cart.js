@@ -10,7 +10,6 @@ const Cart = () => {
     const [cart ,setCart] = useCart();
     const [user] = useUser();
     const [product] = useProduct();
-    console.log()
     return (
         <Container maxW='container.xl' mt='20px'>
             <Heading>

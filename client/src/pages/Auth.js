@@ -17,10 +17,10 @@ const Auth = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
-    const [cart, setCart] = useCart();
+    const [setCart] = useCart();
 
 
-    const [user, setUser] = useUser();
+    const [setUser] = useUser();
 
     const handleClick = async () => {
         let data;
@@ -29,12 +29,9 @@ const Auth = () => {
         else
             data = await registration(firstName, lastName, email, password, passwordConfirmation);
         setUser(data);
-        console.log(user)
         fetchCartItems().then(data => setCart(data));
         history.push(HOME_ROUTE);
     }
-    console.log(cart);
-
     return (
             <Container
                 maxW="container.md"

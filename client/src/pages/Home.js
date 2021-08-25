@@ -17,8 +17,6 @@ const Home = () => {
         useEffect(() => {
             handlePromise();
         });
-
-console.log(product);
     return (
         <Container maxW={{xl: 'container.xl', lg: 'container.lg', md: 'container.md', sm: 'container.sm'}}>
             <Box d='flex' mt='30px'>

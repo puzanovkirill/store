@@ -48,9 +48,9 @@ const Product = () => {
                     <Box mt='50px' fontSize='2em'>
                         {product.map(product =>{
                             if(product.id.toString() === id.toString()) {
-                                return <Box>
+                                return <Box  key={id}>
                                     {product.properties.map(property =>
-                                        <Box key={product.id}>{property.name}: {property.value}
+                                        <Box key={property.name}>{property.name}: {property.value}
                                         </Box>
                                     )
                                     }
