@@ -4,7 +4,7 @@ import {Context} from "../index";
 import {FiDelete} from 'react-icons/fi';
 import {useUser} from "../stores/UserStore";
 import {useCart} from "../stores/CartStore";
-import {fetchCartItems} from "../http/cartAPI";
+import {fetchCartItems, removeCartItem} from "../http/cartAPI";
 import {useProduct} from "../stores/ProductStore";
 
 const Cart = () => {
@@ -28,9 +28,9 @@ const Cart = () => {
                     {cart.products.map(cartItem =>
                         product.map(productItem => {
                             if(productItem.id.toString() === cartItem.toString()){
-                                return <ListItem fontSize='2em'>
+                                return <ListItem fontSize='2em' key={cartItem}>
                                     <Box d='flex' justifyContent='space-between' alignItems='center'>
-                                        <Box d='flex' flexDirection='row' justifyContent='space-between' w='90%'>
+                                        <Box d='flex' flexDirection='row' justifyContent='space-between' w='95%'>
                                             <Box>
                                                 {productItem.name}
                                             </Box>
@@ -38,7 +38,10 @@ const Cart = () => {
                                                 {productItem.price} $
                                             </Box>
                                         </Box>
-                                        <Button>
+                                        <Button onClick={() => {
+                                            removeCartItem(cartItem).then(data => console.log(data));
+                                            fetchCartItems().then(data => setCart(data));
+                                        }}>
                                             <FiDelete/>
                                         </Button>
                                     </Box>
@@ -49,7 +52,7 @@ const Cart = () => {
                 </OrderedList>
                 <Divider mt='10px'/>
 
-                <Box fontSize='2em' alignSelf='flex-end'>
+                <Box fontSize='2em' alignSelf='flex-end' mt='1em'>
                     Total: {cart.total} $
                 </Box>
             </Box>
