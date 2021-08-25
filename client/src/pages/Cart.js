@@ -1,23 +1,16 @@
-import React, {useContext, useState} from 'react';
+import React from 'react';
 import {Box, Button, Container, Divider, Heading, ListItem, OrderedList} from "@chakra-ui/react";
-import {Context} from "../index";
 import {FiDelete} from 'react-icons/fi';
 import {useUser} from "../stores/UserStore";
 import {useCart} from "../stores/CartStore";
-import {fetchCartItems, removeCartItem} from "../http/cartAPI";
+import { removeCartItem} from "../http/cartAPI";
 import {useProduct} from "../stores/ProductStore";
 
 const Cart = () => {
-    const {productStore} = useContext(Context);
     const [cart ,setCart] = useCart();
-    const [user, setUser] = useUser();
-    const [product, setProduct] = useProduct();
+    const [user] = useUser();
+    const [product] = useProduct();
     console.log()
-
-    let sum = 0;
-    // cartStore.ids.map(id =>
-    //         sum += parseInt(productStore.products[id].price)
-    //     );
     return (
         <Container maxW='container.xl' mt='20px'>
             <Heading>

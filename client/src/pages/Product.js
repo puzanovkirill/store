@@ -1,18 +1,17 @@
-import React, {useContext, useState} from 'react';
+import React from 'react';
 import {Box, Button, Container, Divider, Heading, Image, useToast} from "@chakra-ui/react";
 import img from '../assets/default-product.png';
 import {MdAddShoppingCart} from "react-icons/all";
-import {Context} from "../index";
 import {useParams} from "react-router-dom";
 import {useProduct} from "../stores/ProductStore";
 import {useUser} from "../stores/UserStore";
 import {useCart} from "../stores/CartStore";
-import {addCartItem, fetchCartItems} from "../http/cartAPI";
+import {addCartItem} from "../http/cartAPI";
 
 const Product = () => {
-    const [product, setProduct] = useProduct();
-    const [user, setUser] = useUser();
-    const [cart, setCart] = useCart();
+    const [product] = useProduct();
+    const [user] = useUser();
+    const [setCart] = useCart();
     const {id} = useParams();
     const toast = useToast();
     const showToast = () => {
@@ -49,7 +48,13 @@ const Product = () => {
                     <Box mt='50px' fontSize='2em'>
                         {product.map(product =>{
                             if(product.id.toString() === id.toString()) {
-                                return <Box key={product.id}>{product.properties.map(property => <Box>{property.name}: {property.value}</Box>)}</Box>
+                                return <Box>
+                                    {product.properties.map(property =>
+                                        <Box key={product.id}>{property.name}: {property.value}
+                                        </Box>
+                                    )
+                                    }
+                                </Box>
                             }
                         }
                         )}
@@ -70,7 +75,6 @@ const Product = () => {
                         Add to cart
                     </Button>
                     : ''}
-
                 </Box>
             </Box>
         </Container>

@@ -1,6 +1,5 @@
-import React, {useContext, useState} from 'react';
+import React, { useState} from 'react';
 import {Box, Button, Container, FormControl, FormLabel, Heading, Input} from "@chakra-ui/react";
-import {Context} from "../index";
 import {NavLink, useHistory, useLocation} from "react-router-dom";
 import {HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
 import {useUser} from "../stores/UserStore";

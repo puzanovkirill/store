@@ -1,10 +1,6 @@
 import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import UserStore from "./stores/UserStore";
-import ProductStore from "./stores/ProductStore";
-import {createBreakpoints} from "@chakra-ui/theme-tools";
-import CartStore from "./stores/CartStore";
 import UserProvider from "./stores/UserStore";
 import CartProvider from "./stores/CartStore";
 import ProductProvider from "./stores/ProductStore";

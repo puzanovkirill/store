@@ -1,4 +1,4 @@
-import {$authHost, $host} from "./index";
+import { $host} from "./index";
 import jwt_decode from 'jwt-decode';
 
 export const registration = async (firstName, lastName, email, password, passwordConfirmation) => {

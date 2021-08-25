@@ -1,9 +1,8 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Box, Center, Container, Grid} from "@chakra-ui/react";
 import ProductItem from "../components/ProductItem";
 import Filter from "../components/Filter";
-import {Context} from "../index";
-import {fetchCategories, fetchProducts} from "../http/productAPI";
+import {fetchProducts} from "../http/productAPI";
 import {useProduct} from "../stores/ProductStore";
 
 const Home = () => {

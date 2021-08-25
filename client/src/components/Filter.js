@@ -1,10 +1,8 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Box, Input, InputGroup, Select, InputLeftAddon} from "@chakra-ui/react";
 import {AiOutlineSearch} from "react-icons/ai";
-import {Context} from "../index";
 
 const Filter = () => {
-    const {productStore} = useContext(Context);
 
     return (
         <Box d='flex' w='100%' justifyContent='space-around' flexDirection={{

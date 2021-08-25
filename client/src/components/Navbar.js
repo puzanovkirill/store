@@ -1,13 +1,11 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Box, Container, Link} from "@chakra-ui/react";
 import {NavLink} from "react-router-dom";
 import {AiOutlineShoppingCart, AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import {CART_ROUTE, HOME_ROUTE, LOGIN_ROUTE} from "../utils/consts";
-import {Context} from "../index";
 import {useUser} from "../stores/UserStore";
 
 const Navbar = () => {
-    const {userStore} = useContext(Context);
     const [user, setUser] = useUser();
     return (
         <Box bg="#805AD5" w="100%" p={4} color="white" >

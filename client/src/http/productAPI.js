@@ -1,4 +1,4 @@
-import {$authHost, $host} from "./index";
+import { $host} from "./index";
 
 export const fetchCategories = async () => {
     const {data} = await $host.get('api/categories');
@@ -13,7 +13,6 @@ export const fetchOneCategory = async (id) => {
 export const fetchProducts = async () => {
     const {data} = await $host.get(
         'api/products',
-
         );
     return data;
 }
