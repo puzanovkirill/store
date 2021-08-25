@@ -39,8 +39,7 @@ const Cart = () => {
                                             </Box>
                                         </Box>
                                         <Button onClick={() => {
-                                            removeCartItem(cartItem).then(data => console.log(data));
-                                            fetchCartItems().then(data => setCart(data));
+                                            removeCartItem(cartItem).then(data => setCart(data));
                                         }}>
                                             <FiDelete/>
                                         </Button>

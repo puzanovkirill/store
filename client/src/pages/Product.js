@@ -7,7 +7,7 @@ import {useParams} from "react-router-dom";
 import {useProduct} from "../stores/ProductStore";
 import {useUser} from "../stores/UserStore";
 import {useCart} from "../stores/CartStore";
-import {addCartItem} from "../http/cartAPI";
+import {addCartItem, fetchCartItems} from "../http/cartAPI";
 
 const Product = () => {
     const [product, setProduct] = useProduct();
@@ -16,9 +16,15 @@ const Product = () => {
     const {id} = useParams();
     const toast = useToast();
     const showToast = () => {
+        let currentProduct;
+        product.map(product =>{
+                if(product.id.toString() === id.toString()){
+                     return currentProduct = product.name;
+                }}
+            )
         toast({
             title: "Product added.",
-            description: "Product added to your cart.",
+            description: `${currentProduct} added to your cart.`,
             status: "success",
             duration: 9000,
             isClosable: true,
@@ -56,7 +62,7 @@ const Product = () => {
                         w='150px'
                         mt='30px'
                         onClick={() => {
-                            addCartItem(id).then(data => console.log(data));
+                            addCartItem(id).then(data => setCart(data));
                             showToast();
                         }
                         }
