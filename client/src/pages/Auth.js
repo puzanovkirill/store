@@ -25,13 +25,15 @@ const Auth = () => {
 
     const handleClick = async () => {
         let data;
-        isLogin ?
-            data =await login(email, password) :
-            data = await registration(firstName, lastName, email, password, passwordConfirmation)
+        if(isLogin)
+            data =await login(email, password);
+        else
+            data = await registration(firstName, lastName, email, password, passwordConfirmation);
         setUser(data);
+        console.log(user)
         setCart(fetchCartItems());
         console.log(cart);
-        // history.push(HOME_ROUTE);
+        history.push(HOME_ROUTE);
     }
 
     return (

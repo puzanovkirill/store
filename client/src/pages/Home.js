@@ -8,11 +8,18 @@ import {useProduct} from "../stores/ProductStore";
 
 const Home = () => {
     const [product, setProduct] = useProduct();
-    if(!product){
-        const data = fetchProducts();
-        console.log(data);
-        setProduct(data);
+
+    const handlePromise = () => {
+        if(!product){
+            fetchProducts().then(data => setProduct(data)
+            )
+        }
     }
+        useEffect(() => {
+            handlePromise();
+        });
+
+
     return (
         <Container maxW={{xl: 'container.xl', lg: 'container.lg', md: 'container.md', sm: 'container.sm'}}>
             <Box d='flex' mt='30px'>
@@ -30,6 +37,12 @@ const Home = () => {
                     }
                     gap={6} mt='30px'
                 >
+                    {!product ? '' :
+                        product.map(item =>
+                        <ProductItem key={item['id']} id={item['id']} name={item['name']} price={item['price']}/>
+                        )
+                    }
+
                         {/*{productStore.products.map(product =>*/}
                         {/*    <ProductItem key={product.id} product={product}/>*/}
                         {/*)}*/}

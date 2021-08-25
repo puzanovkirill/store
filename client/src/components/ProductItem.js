@@ -4,16 +4,13 @@ import img from '../assets/default-product.png';
 import {useHistory} from 'react-router-dom';
 import {PRODUCT_ROUTE} from "../utils/consts";
 
-const ProductItem = (product) => {
+const ProductItem = ({id, name, price}) => {
     const history = useHistory();
-
-
-    console.log(product);
     return (
         <Box
             w='300px'
             minH='350px'
-            onClick={() => history.push(`${PRODUCT_ROUTE}/${product.id}`)}
+            onClick={() => history.push(`${PRODUCT_ROUTE}/${id}`)}
             shadow='lg'
             borderRadius='lg'
             cursor='pointer'
@@ -25,8 +22,8 @@ const ProductItem = (product) => {
         >
             <Image src={img} w='250px' h='250px' m='auto'/>
             <Box d='flex' flexDirection='column' textAlign='center'>
-                <Box>{product.name}</Box>
-                <Box>{product.price} rub.</Box>
+                <Box>{name}</Box>
+                <Box>{price} $</Box>
             </Box>
         </Box>
     );
