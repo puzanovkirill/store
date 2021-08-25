@@ -19,7 +19,7 @@ const Home = () => {
             handlePromise();
         });
 
-
+console.log(product);
     return (
         <Container maxW={{xl: 'container.xl', lg: 'container.lg', md: 'container.md', sm: 'container.sm'}}>
             <Box d='flex' mt='30px'>
@@ -42,10 +42,6 @@ const Home = () => {
                         <ProductItem key={item['id']} id={item['id']} name={item['name']} price={item['price']}/>
                         )
                     }
-
-                        {/*{productStore.products.map(product =>*/}
-                        {/*    <ProductItem key={product.id} product={product}/>*/}
-                        {/*)}*/}
                 </Grid>
             </Center>
         </Container>

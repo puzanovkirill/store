@@ -4,11 +4,14 @@ import img from '../assets/default-product.png';
 import {MdAddShoppingCart} from "react-icons/all";
 import {Context} from "../index";
 import {useParams} from "react-router-dom";
+import {useProduct} from "../stores/ProductStore";
+import {useUser} from "../stores/UserStore";
+import {useCart} from "../stores/CartStore";
 
 const Product = () => {
-    const {cartStore} = useContext(Context);
-    const [cartStoreState, setCartStoreState] = useState(cartStore);
-    const {productStore} = useContext(Context);
+    const [product, setProduct] = useProduct();
+    const [user, setUser] = useUser();
+    const [cart, setCart] = useCart();
     const {id} = useParams();
     const toast = useToast();
     const showToast = () => {
@@ -22,27 +25,29 @@ const Product = () => {
     }
     return (
         <Container maxW="container.xl" p='40px'>
-            <Box d='flex' justifyContent='space-between'>
+            <Box d='flex' justifyContent='space-evenly'>
                 <Image src={img}/>
                 <Box>
-                    <Heading fontSize='4em'>
-                        {productStore.products.map(product =>
+                    <Heading fontSize='4em' wordBreak='break'>
+                        {product.map(product =>
                             product.id.toString() === id.toString() ? product.name : ''
                         )}
                     </Heading>
                     <Box fontSize='3em' mt='50px'>
-                        {productStore.products.map(product =>
+                        {product.map(product =>
                             product.id.toString() === id.toString() ? `${product.price} rub.` : ''
                         )}
                     </Box>
                     <Divider mt='50px'/>
                     <Box mt='50px' fontSize='2em'>
-                        <Box>Some additional info</Box>
-                        <Box>Some additional info</Box>
-                        <Box>Some additional info</Box>
-                        <Box>Some additional info</Box>
+                        {product.map(product =>{
+                            if(product.id.toString() === id.toString()) {
+                                return <Box>{product.properties.map(property => <Box>{property.name}: {property.value}</Box>)}</Box>
+                            }
+                        }
+                        )}
                     </Box>
-                    <Button
+                    {user ? <Button
                         leftIcon={<MdAddShoppingCart />}
                         bg="#805AD5"
                         color='white'
@@ -50,14 +55,15 @@ const Product = () => {
                         w='150px'
                         mt='30px'
                         onClick={() => {
-                            setCartStoreState(cartStore.addProduct(parseInt(id)));
-                            console.log(cartStore.ids);
+
                             showToast();
-                            }
+                        }
                         }
                     >
                         Add to cart
                     </Button>
+                    : ''}
+
                 </Box>
             </Box>
         </Container>
