@@ -4,7 +4,7 @@ import {AiOutlineSearch} from "react-icons/ai";
 import {useCategory} from "../stores/CategoryStore";
 import {useProduct} from "../stores/ProductStore";
 import {useBrand} from "../stores/BrandStore";
-import {fetchProductsFiltered} from "../http/productAPI";
+import {fetchProductsFiltered, fetchSearch, search} from "../http/productAPI";
 
 const Filter = () => {
     const [category] = useCategory();
@@ -50,8 +50,10 @@ const Filter = () => {
                     <Input
                         placeholder='Search'
                         variant="outline"
-
-                    />
+                        onChange={e =>
+                            fetchSearch(e.target.value).then(data => setProduct(data))
+                        }
+                            />
                 </InputGroup>
             </Box>
             <Select

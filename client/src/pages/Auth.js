@@ -25,15 +25,13 @@ const Auth = () => {
     const handleClick = async () => {
         let data;
         if(isLogin)
-            data =await login(email, password);
+            data = await login(email, password);
         else
             data = await registration(firstName, lastName, email, password, passwordConfirmation);
         setUser(data);
         fetchCartItems().then(data => setCart(data));
         history.push(HOME_ROUTE);
     }
-    console.log(user);
-
     return (
             <Container
                 maxW="container.md"

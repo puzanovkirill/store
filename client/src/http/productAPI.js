@@ -35,6 +35,14 @@ export const fetchProductsFiltered = async (categories, brands) => {
     return data;
 }
 
+export const fetchSearch = async (search) => {
+    const {data} = await $host.get(
+        'api/products',
+        {params: { search } }
+    );
+    return data;
+}
+
 export const fetchOneProduct = async (id) => {
     const {data} = await $host.get(`api/product/${id}`);
     return data;
