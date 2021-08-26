@@ -3,6 +3,7 @@ import {Box, Center, Container, Grid} from "@chakra-ui/react";
 import ProductItem from "../components/ProductItem";
 import Filter from "../components/Filter";
 import {useProduct} from "../stores/ProductStore";
+import {fetchProductsByCategory} from "../http/productAPI";
 
 const Home = () => {
     const [product] = useProduct();

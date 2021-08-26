@@ -10,10 +10,28 @@ export const fetchOneCategory = async (id) => {
     return data;
 }
 
+export const fetchBrands = async () => {
+    const {data} = await $host.get('api/brands');
+    return data;
+}
+
+export const fetchOneBrand = async (id) => {
+    const {data} = await $host.get(`api/brands/${id}`);
+    return data;
+}
+
 export const fetchProducts = async () => {
     const {data} = await $host.get(
         'api/products',
         );
+    return data;
+}
+
+export const fetchProductsByCategory = async (id) => {
+    const {data} = await $host.get(
+        'api/products',
+        {params: {id}}
+    );
     return data;
 }
 
