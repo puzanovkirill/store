@@ -3,30 +3,20 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all
-
-    if params[:categories]
-      @products = @products.where(category_id: params[:categories])
+    filters.each do |key, value|
+      @products = @products.public_send("filter_by_#{key}", value) if value.present?
     end
-
-    if params[:brands]
-      @products = @products.where(brand_id: params[:brands])
-    end
-
-    if params[:search]
-      @products = @products
-        .joins(:brand)
-        .joins(:category)
-        .where(
-        'products.name ILIKE :search OR brands.name ILIKE :search OR categories.name ILIKE :search',
-        search: "%#{params[:search]}%"
-      )
-    end
-    
     json_response obj: @products
   end
 
   def show
-    @product = Product.find(params[:id])
+    @product = Product.find params[:id]
     json_response obj: @product
+  end
+
+  private
+
+  def filters
+    params.slice :categories, :brands, :search
   end
 end
