@@ -3,14 +3,16 @@ import {Center, ChakraProvider, Flex, Spinner} from "@chakra-ui/react"
 import Navbar from "./components/Navbar.js";
 import AppRouter from "./components/AppRouter";
 import {BrowserRouter} from "react-router-dom";
-import {fetchCategories, fetchProducts} from "./http/productAPI";
+import {fetchBrands, fetchCategories, fetchProducts} from "./http/productAPI";
 import {useProduct} from "./stores/ProductStore";
 import {useCategory} from "./stores/CategoryStore";
+import {useBrand} from "./stores/BrandStore";
 
 function App() {
     const [product, setProduct] = useProduct();
     const [category, setCategory] = useCategory();
     const [loading, setLoading] = useState(true);
+    const [brand, setBrand] = useBrand();
     const handlePromise = () => {
         if(!product){
             fetchProducts().then(data => setProduct(data))
@@ -18,7 +20,10 @@ function App() {
         if(!category) {
             fetchCategories().then(data => setCategory(data));
         }
-        if(product && category) setLoading(false)
+        if(!brand){
+            fetchBrands().then(data => setBrand(data));
+        }
+        if(product && category && brand) setLoading(false)
     }
     useEffect(() => {
         handlePromise();
