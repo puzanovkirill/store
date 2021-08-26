@@ -13,8 +13,11 @@ class ProductsController < ApplicationController
     end
 
     if params[:search]
-      @products = @products.joins(:brand).where(
-        'products.name ILIKE :search OR brands.name ILIKE :search',
+      @products = @products
+        .joins(:brand)
+        .joins(:category)
+        .where(
+        'products.name ILIKE :search OR brands.name ILIKE :search OR categories.name ILIKE :search',
         search: "%#{params[:search]}%"
       )
     end
