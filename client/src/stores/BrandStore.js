@@ -1,24 +1,20 @@
-
-import {createContext, useContext, useMemo, useState} from "react";
+import { createContext, useContext, useMemo, useState } from 'react';
 
 const BrandContext = createContext();
 
 export const BrandProvider = ({ children }) => {
-    const [brand, setBrand] =  useState();
-    const contextValue = useMemo(
-        () => [brand, setBrand],
-        [brand, setBrand],
-    );
+  const [brand, setBrand] = useState();
+  const contextValue = useMemo(() => [brand, setBrand], [brand, setBrand]);
 
-    return (
-        <BrandContext.Provider value={contextValue}>
-            {children}
-        </BrandContext.Provider>
-    );
+  return (
+    <BrandContext.Provider value={contextValue}>
+      {children}
+    </BrandContext.Provider>
+  );
 };
 
 export function useBrand() {
-    return useContext(BrandContext);
+  return useContext(BrandContext);
 }
 
 export default BrandProvider;
