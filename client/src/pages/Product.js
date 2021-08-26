@@ -11,7 +11,7 @@ import {addCartItem} from "../http/cartAPI";
 const Product = () => {
     const [product] = useProduct();
     const [user] = useUser();
-    const [setCart] = useCart();
+    const [cart, setCart] = useCart();
     const {id} = useParams();
     const toast = useToast();
     const showToast = () => {
@@ -39,6 +39,11 @@ const Product = () => {
                             product.id.toString() === id.toString() ? product.name : ''
                         )}
                     </Heading>
+                    <Box fontSize='2.5em'>
+                        {product.map(product =>
+                            product.id.toString() === id.toString() ? product.brandId : ''
+                        )}
+                    </Box>
                     <Box fontSize='3em' mt='50px'>
                         {product.map(product =>
                             product.id.toString() === id.toString() ? `${product.price} rub.` : ''

@@ -13,7 +13,7 @@ const Cart = () => {
     return (
         <Container maxW='container.xl' mt='20px'>
             <Heading>
-                User: {user.first_name} {user.last_name}
+                User: {user.firstName} {user.lastName}
             </Heading>
             <Box d='flex' flexDirection='column'>
                 <OrderedList mt='20px'>

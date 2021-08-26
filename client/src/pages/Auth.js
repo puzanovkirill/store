@@ -32,6 +32,8 @@ const Auth = () => {
         fetchCartItems().then(data => setCart(data));
         history.push(HOME_ROUTE);
     }
+    console.log(user);
+
     return (
             <Container
                 maxW="container.md"

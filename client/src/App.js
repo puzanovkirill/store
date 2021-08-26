@@ -42,7 +42,6 @@ function App() {
 
             />
         </Flex>
-
     }
     return (
     <ChakraProvider>
