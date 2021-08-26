@@ -33,7 +33,7 @@ macbook = Product.create(
   price: 1299, 
   category_id: laptops.id, 
   brand_id: apple.id,
-  image: '/api/macbook.jpeg'
+  image: '/api/macbook.jpg'
 )
 matebook = Product.create(
   name: 'Huawei Matebook 13', 
