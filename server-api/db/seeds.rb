@@ -26,7 +26,7 @@ pixel = Product.create(
   price: 449, 
   category_id: phones.id, 
   brand_id: google.id,
-  image: '/api/pixel12.jpeg'
+  image: '/api/pixel4.jpeg'
 )
 macbook = Product.create(
   name: 'MacBook Pro 13 M1', 
