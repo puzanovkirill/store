@@ -8,16 +8,16 @@ import CategoryProvider from './stores/CategoryStore';
 import BrandProvider from './stores/BrandStore';
 
 ReactDOM.render(
-    <BrandProvider>
-      <CategoryProvider>
-        <ProductProvider>
-          <CartProvider>
-            <UserProvider>
-              <App />
-            </UserProvider>
-          </CartProvider>
-        </ProductProvider>
-      </CategoryProvider>
-    </BrandProvider>,
+  <BrandProvider>
+    <CategoryProvider>
+      <ProductProvider>
+        <CartProvider>
+          <UserProvider>
+            <App />
+          </UserProvider>
+        </CartProvider>
+      </ProductProvider>
+    </CategoryProvider>
+  </BrandProvider>,
   document.getElementById('root')
 );

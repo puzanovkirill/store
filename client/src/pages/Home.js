@@ -31,14 +31,17 @@ const Home = () => {
         >
           {!product
             ? ''
-            : product.map((item) => (
-                <ProductItem
-                  key={item['id']}
-                  id={item['id']}
-                  name={item['name']}
-                  price={item['price']}
-                />
-              ))}
+            : product.map((item) => {
+                return (
+                  <ProductItem
+                    key={item.id}
+                    id={item.id}
+                    name={item.name}
+                    price={item.price}
+                    img={process.env.REACT_APP_API_URL + item.image}
+                  />
+                );
+              })}
         </Grid>
       </Center>
     </Container>

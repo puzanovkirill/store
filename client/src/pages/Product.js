@@ -47,7 +47,11 @@ const Product = () => {
   return (
     <Container maxW="container.xl" p="40px">
       <Box d="flex" justifyContent="space-evenly">
-        <Image src={img} />
+        <Image
+          src={process.env.REACT_APP_API_URL + findCurrentProduct()[0].image}
+          w="550px"
+          h="550px"
+        />
         <Box>
           <Heading fontSize="4em" wordBreak="break">
             {findCurrentProduct()[0].name}

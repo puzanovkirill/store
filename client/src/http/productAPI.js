@@ -41,3 +41,4 @@ export const fetchOneProduct = async (id) => {
   const { data } = await $host.get(`api/product/${id}`);
   return data;
 };
+

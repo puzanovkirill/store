@@ -3,7 +3,12 @@ import { ChakraProvider, Flex, Spinner } from '@chakra-ui/react';
 import Navbar from './components/Navbar.js';
 import AppRouter from './components/AppRouter';
 import { BrowserRouter } from 'react-router-dom';
-import { fetchBrands, fetchCategories, fetchProducts } from './http/productAPI';
+import {
+  fetchBrands,
+  fetchCategories,
+  fetchImage,
+  fetchProducts,
+} from './http/productAPI';
 import { useProduct } from './stores/ProductStore';
 import { useCategory } from './stores/CategoryStore';
 import { useBrand } from './stores/BrandStore';

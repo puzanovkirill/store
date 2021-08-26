@@ -1,10 +1,9 @@
 import React from 'react';
 import { Box, Image } from '@chakra-ui/react';
-import img from '../assets/default-product.png';
 import { useHistory } from 'react-router-dom';
 import { PRODUCT_ROUTE } from '../utils/consts';
 
-const ProductItem = ({ id, name, price }) => {
+const ProductItem = ({ id, name, price, img }) => {
   const history = useHistory();
   return (
     <Box
