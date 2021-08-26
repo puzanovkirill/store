@@ -27,10 +27,10 @@ export const fetchProducts = async () => {
     return data;
 }
 
-export const fetchProductsByCategory = async (id) => {
+export const fetchProductsFiltered = async (categories, brands) => {
     const {data} = await $host.get(
         'api/products',
-        {params: {id}}
+        {params: { categories, brands } }
     );
     return data;
 }
