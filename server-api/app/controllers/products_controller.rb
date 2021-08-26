@@ -2,16 +2,6 @@
 
 class ProductsController < ApplicationController
   def index
-  #  @products = if params[:categories] && params[:brands]
-              #    Product.where(category_id: params[:categories]).where(brand_id: params[:brands])
-              #  elsif params[:categories]
-              #    Product.where(category_id: params[:categories])
-              #  elsif params[:brands]
-              #    Product.where(brand_id: params[:brands])
-              #  else
-              #    Product.all
-              #   end
-    
     @products = Product.all
 
     if params[:categories]
@@ -21,6 +11,14 @@ class ProductsController < ApplicationController
     if params[:brands]
       @products = @products.where(brand_id: params[:brands])
     end
+
+    if params[:search]
+      @products = @products.joins(:brand).where(
+        'products.name ILIKE :search OR brands.name ILIKE :search',
+        search: "%#{params[:search]}%"
+      )
+    end
+    
     json_response obj: @products
   end
 
