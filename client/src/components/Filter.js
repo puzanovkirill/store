@@ -1,8 +1,10 @@
 import React from 'react';
 import {Box, Input, InputGroup, Select, InputLeftAddon} from "@chakra-ui/react";
 import {AiOutlineSearch} from "react-icons/ai";
+import {useCategory} from "../stores/CategoryStore";
 
 const Filter = () => {
+    const [category] = useCategory();
 
     return (
         <Box d='flex' w='100%' justifyContent='space-around' flexDirection={{
@@ -33,7 +35,6 @@ const Filter = () => {
             </Box>
             <Select
                 placeholder='Choose type'
-                // ml='50px'
                 w={
                     {
                         xl:'18rem',
@@ -49,14 +50,10 @@ const Filter = () => {
                     }
                 }
             >
-                <option>opt1</option>
-                {/*{productStore.types.map(type =>*/}
-                {/*    <option key={type.id}>{type.name}</option>*/}
-                {/*)}*/}
+                {category.map(item =><option key={item.id}>{item.name}</option>)}
             </Select>
             <Select
                 placeholder='Choose brand'
-                // ml='50px'
                 w={
                     {
                         xl:'18rem',

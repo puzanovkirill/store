@@ -1,22 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Box, Center, Container, Grid} from "@chakra-ui/react";
 import ProductItem from "../components/ProductItem";
 import Filter from "../components/Filter";
-import {fetchProducts} from "../http/productAPI";
 import {useProduct} from "../stores/ProductStore";
 
 const Home = () => {
-    const [product, setProduct] = useProduct();
-
-    const handlePromise = () => {
-        if(!product){
-            fetchProducts().then(data => setProduct(data)
-            )
-        }
-    }
-        useEffect(() => {
-            handlePromise();
-        });
+    const [product] = useProduct();
     return (
         <Container maxW={{xl: 'container.xl', lg: 'container.lg', md: 'container.md', sm: 'container.sm'}}>
             <Box d='flex' mt='30px'>
