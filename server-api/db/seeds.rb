@@ -8,7 +8,11 @@ Cart.destroy_all
 Brand.destroy_all
 
 phones = Category.create(name: 'Phones')
+ios_phones = Category.create(name: 'iOS phones', parent: phones)
+android_phones = Category.create(name: 'Android phones', parent: phones)
 laptops = Category.create(name: 'Laptops')
+macos_laptops = Category.create(name: 'MacOS laptops', parent: laptops)
+other_laptops = Category.create(name: 'Other laptops', parent: laptops)
 
 apple = Brand.create(name: 'Apple')
 google = Brand.create(name: 'Google')
@@ -17,28 +21,28 @@ huawei = Brand.create(name: 'Huawei')
 i_phone = Product.create(
   name: 'iPhone 12', 
   price: 699, 
-  category_id: phones.id, 
+  category_id: ios_phones.id, 
   brand_id: apple.id,
   image: '/api/iphone12.jpeg'
 )
 pixel = Product.create(
   name: 'Google Pixel 4', 
   price: 449, 
-  category_id: phones.id, 
+  category_id: android_phones.id, 
   brand_id: google.id,
   image: '/api/pixel4.jpeg'
 )
 macbook = Product.create(
   name: 'MacBook Pro 13 M1', 
   price: 1299, 
-  category_id: laptops.id, 
+  category_id: macos_laptops.id, 
   brand_id: apple.id,
   image: '/api/macbook.jpg'
 )
 matebook = Product.create(
   name: 'Huawei Matebook 13', 
   price: 999, 
-  category_id: laptops.id, 
+  category_id: other_laptops.id, 
   brand_id: huawei.id,
   image: '/api/matebook.jpeg'
 )
