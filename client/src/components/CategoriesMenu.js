@@ -2,126 +2,111 @@ import React, {useEffect, useState} from 'react';
 import {Collapse} from "react-collapse/lib/Collapse";
 import {fetchProductsFiltered} from "../http/productAPI";
 import {useCategory} from "../stores/CategoryStore";
-import {useBrand} from "../stores/BrandStore";
 import {useProduct} from "../stores/ProductStore";
 
+
 const Content = (props) => {
-    const [category] = useCategory();
     const [product, setProduct] = useProduct();
-    const [categoryItem, setCategoryItem] = useState();
-    let categoryId;
+    const [categoryItem, setCategoryItem] = useState({});
+    const styles = {
+        marginLeft: '40px'
+    }
     useEffect(() => {
-        category.forEach((item) => {
-            if (item.name === categoryItem) {
-                categoryId = item.id;
-            }
-            console.log(categoryId)
-        });
-        fetchProductsFiltered(categoryId).then((data) => setProduct(data));
-    }, [categoryItem, categoryId]);
+        fetchProductsFiltered(categoryItem.id).then((data) => setProduct(data));
+    }, [categoryItem]);
     return (
-        <div>
+        <div style={styles}>
             <div className="label"
                  onClick={() => {
-                     setCategoryItem(props.props.name);
+                     setCategoryItem(props.props);
+                     if(Object.keys(categoryItem).length !== 0)
+                     fetchProductsFiltered(categoryItem.id).then((data) => setProduct(data));
                  }}>
                 {props.props.name}
             </div>
         </div>);
 }
 
-/*class Content extends React.PureComponent {
-    constructor(props) {
-        super(props);
+const Group = (props) => {
+    const [isOpened, setIsOpened] = useState(false);
+    const p = props;
+    const [product, setProduct] = useProduct();
+    const [categoryItem, setCategoryItem] = useState({});
+    useEffect(() => {
+        fetchProductsFiltered(categoryItem.id).then((data) => setProduct(data));
+    }, [categoryItem]);
+    const styles = {
+        marginLeft: '20px'
     }
-
-    render() {
-        const p = this.props;
-        return (
-            <div>
-                <div className="label">
-                    {p.props.name}
+    return (
+        <div>
+            <div className="config" style={styles}>
+                <div className="label" onClick={(e) => {
+                    e.preventDefault();
+                    setCategoryItem(p.categoryItem);
+                    if(Object.keys(categoryItem).length !== 0)
+                    fetchProductsFiltered(categoryItem.id).then((data) => setProduct(data));
+                }}>
+                    {p.categoryItem.name}
+                    <input
+                        className="input"
+                        type="checkbox"
+                        checked={isOpened}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                        }}
+                        onChange={({target: {checked}}) => setIsOpened(checked)}
+                    />
                 </div>
             </div>
-        );
-    }
-}*/
-
-class Group extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {isOpened: false};
-    }
-
-    render() {
-        const {isOpened} = this.state;
-        const p = this.props;
-        return (
-            <div>
-                <div className="config">
-                    <div className="label">
-                        {p.props.name}
-                        <input
-                            className="input"
-                            type="checkbox"
-                            checked={isOpened}
-                            onChange={({target: {checked}}) =>
-                                this.setState({isOpened: checked})
-                            }
-                        />
-                    </div>
-                </div>
-                <Collapse isOpened={isOpened} hasNestedCollapse>
-                    {p.props.children.map(item => {
-                        if (item.children) {
-                            return <Group  key={item.name} props={item}/>
-                        } else return <Content key={item.name} props={item}/>
-                    })}
-                    {}
-                </Collapse>
-            </div>
-        );
-    }
+            <Collapse isOpened={isOpened} hasNestedCollapse>
+                {p.categoryItem.children.map(item => {
+                    if (item.children) {
+                        return <Group key={item.name} props={item}/>
+                    } else return <Content key={item.name} props={item}/>
+                })}
+                {}
+            </Collapse>
+        </div>
+    );
 }
 
-class CategoriesMenu extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {isOpened: false};
-    }
-
-    render() {
-        const {isOpened} = this.state;
-        const p = this.props;
-        return (
-            <div>
-                <div className="config">
-                    <label
-                        className="label"
-                        onClick={(e) => e.preventDefault()}
-                    >
-                        Filter
-                        <input
-                            className="input"
-                            type="checkbox"
-                            checked={isOpened}
-                            onClick={(e) => e.stopPropagation()}
-                            onChange={({target: {checked}}) =>
-                                this.setState({isOpened: checked})
+const CategoriesMenu = () => {
+    const [isOpened, setIsOpened] = useState(false);
+    const [category] = useCategory();
+    const [product, setProduct] = useProduct();
+    return (
+        <div>
+            <div className="config">
+                <label
+                    className="label"
+                    onClick={(e) => e.preventDefault()}
+                >
+                    Choose categories
+                    <input
+                        className="input"
+                        type="checkbox"
+                        checked={isOpened}
+                        onClick={(e) => e.stopPropagation()}
+                        onChange={({target: {checked}}) => {
+                            setIsOpened(checked);
+                            if(!checked){
+                                fetchProductsFiltered().then((data) => setProduct(data));
                             }
-                        />
-                    </label>
-                </div>
-                <Collapse isOpened={isOpened} hasNestedCollapse>
-                    {p.props.map((item) => {
-                        if (item.parentId === null) {
-                            return <Group key={item.name} props={item}/>;
-                        }
-                    })}
-                </Collapse>
+                        }}
+
+                    />
+                </label>
             </div>
-        );
-    }
+            <Collapse isOpened={isOpened} hasNestedCollapse>
+                {category.map((item) => {
+                    if (item.parentId == null) {
+                        return <Group key={item.name} categoryItem={item}/>;
+                    }
+                })}
+            </Collapse>
+        </div>
+    );
 }
 
 export default CategoriesMenu;

@@ -36,7 +36,7 @@ const Filter = () => {
     }, [categoryItem, brandItem]);
     function transformData() {
         const nonGroupsArray = [];
-        category.map(item => {
+        category.forEach(item => {
             if(item.parentId !== null) nonGroupsArray.push(item);
         });
         category.forEach(item => {
@@ -85,7 +85,7 @@ const Filter = () => {
                 </InputGroup>
             </Box>
 
-            <CategoriesMenu props={category}/>
+            <CategoriesMenu />
 
             {/*<Select
                 placeholder="Choose type"
