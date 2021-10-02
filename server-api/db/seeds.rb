@@ -32,6 +32,13 @@ pixel = Product.create(
   brand_id: google.id,
   image: '/api/pixel4.jpeg'
 )
+p_40 = Product.create(
+  name: 'Huawei P40',
+  price: 300,
+  category_id: android_phones.id,
+  brand_id: huawei.id,
+  image: '/api/p40.jpeg'
+)
 macbook = Product.create(
   name: 'MacBook Pro 13 M1', 
   price: 1299, 
@@ -51,6 +58,8 @@ Property.create(name: 'Color', value: 'Blue', product_id: i_phone.id)
 Property.create(name: 'Color', value: 'Black', product_id: pixel.id)
 Property.create(name: 'Operating System', value: 'iOS', product_id: i_phone.id)
 Property.create(name: 'Operating System', value: 'Android', product_id: pixel.id)
+Property.create(name: 'Color', value: 'Silver', product_id: p_40.id)
+Property.create(name: 'Operating System', value: 'Android', product_id: p_40.id)
 Property.create(name: 'Color', value: 'Silver', product_id: macbook.id)
 Property.create(name: 'Color', value: 'Silver', product_id: matebook.id)
 
