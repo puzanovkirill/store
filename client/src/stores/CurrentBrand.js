@@ -1,9 +1,9 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 
-const CurrentBrand = createContext({id:undefined});
+const CurrentBrand = createContext(undefined);
 
 export const CurrentBrandProvider = ({ children }) => {
-    const [currentBrand, setCurrentBrand] = useState({id:undefined});
+    const [currentBrand, setCurrentBrand] = useState(undefined);
     const contextValue = useMemo(
         () => [currentBrand, setCurrentBrand],
         [currentBrand, setCurrentBrand]

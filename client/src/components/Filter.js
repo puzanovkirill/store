@@ -21,20 +21,14 @@ const Filter = () => {
     const [category] = useCategory();
     const [brand,] = useBrand();
     const [, setProduct] = useProduct();
-    const [categoryItem,] = useState();
     const [brandItem, setBrandItem] = useState();
-    useEffect(() => {
-        brand.forEach((item) => {
-            if (item.name === brandItem) {
-                setCurrentBrand(item);
-            }
-        });
+    useEffect( () => {
         try {
-            fetchProductsFiltered(currentCategory.id, currentBrand.id).then((data) => setProduct(data));
+            console.log(currentBrand);
+           fetchProductsFiltered(currentCategory.id, currentBrand).then((data) => setProduct(data));
         } catch(e) {
         }
     }, [brandItem, currentBrand]);
-    console.log(currentCategory, currentBrand)
     function transformData() {
         const nonGroupsArray = [];
         category.forEach(item => {
@@ -92,10 +86,10 @@ const Filter = () => {
 
             <Select
                 onChange={(e) => {
-                    setBrandItem(e.target.value);
+                    setCurrentBrand(e.target.value);
                     if(e.target.value === ""){
-                        setCurrentBrand({id:undefined});
-                        fetchProductsFiltered().then((data) => setProduct(data));
+                        setCurrentBrand(undefined);
+                        fetchProductsFiltered(currentCategory.id, undefined).then((data) => setProduct(data));
                     }
                 }}
                 placeholder="Choose brand"
@@ -110,7 +104,7 @@ const Filter = () => {
                 }}
             >
                 {brand.map((item) => (
-                    <option key={item.id}>{item.name}</option>
+                    <option value={item.id} key={item.id}>{item.name}</option>
                 ))}
             </Select>
         </Box>

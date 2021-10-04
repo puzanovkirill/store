@@ -15,7 +15,7 @@ const Content = (props) => {
     }
     useEffect(() => {
         try {
-            fetchProductsFiltered(currentCategory.id, currentBrand.id).then((data) => setProduct(data));
+            fetchProductsFiltered(currentCategory.id, currentBrand).then((data) => setProduct(data));
         } catch (e) {
         }
     }, [currentCategory]);
@@ -25,7 +25,6 @@ const Content = (props) => {
                  style={{cursor: 'pointer'}}
                  onClick={() => {
                      setCurrentCategory(props.props);
-                     console.log(currentCategory, currentBrand);
                  }}>
                 {props.props.name}
             </div>
@@ -40,7 +39,7 @@ const Group = (props) => {
     const [, setProduct] = useProduct();
     useEffect(() => {
         try {
-            fetchProductsFiltered(currentCategory.id, currentBrand.id).then((data) => setProduct(data));
+            fetchProductsFiltered(currentCategory.id, currentBrand).then((data) => setProduct(data));
         } catch (e) {
         }
     }, [currentCategory]);
@@ -84,7 +83,7 @@ const CategoriesMenu = () => {
     const [isOpened, setIsOpened] = useState(false);
     const [category] = useCategory();
     const [, setProduct] = useProduct();
-    const [, setCurrentCategory] = useCurrentCategory({id:undefined});
+    const [, setCurrentCategory] = useCurrentCategory();
     return (
         <div>
             <div className="config">
