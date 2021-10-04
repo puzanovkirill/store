@@ -4,7 +4,7 @@ import {
     Input,
     InputGroup,
     Select,
-    InputLeftAddon, Menu, MenuList, MenuItem, MenuButton, Button,
+    InputLeftAddon
 } from "@chakra-ui/react";
 import {AiOutlineSearch} from "react-icons/ai";
 import {useCategory} from "../stores/CategoryStore";
@@ -12,45 +12,48 @@ import {useProduct} from "../stores/ProductStore";
 import {useBrand} from "../stores/BrandStore";
 import {fetchProductsFiltered, fetchSearch} from "../http/productAPI";
 import CategoriesMenu from "./CategoriesMenu";
+import {useCurrentBrand} from "../stores/CurrentBrand";
+import {useCurrentCategory} from "../stores/CurrentCategory";
 
 const Filter = () => {
+    const [currentBrand, setCurrentBrand] = useCurrentBrand();
+    const [currentCategory] = useCurrentCategory();
     const [category] = useCategory();
-    const [brand, setBrand] = useBrand();
-    const [product, setProduct] = useProduct();
-    const [categoryItem, setCategoryItem] = useState();
+    const [brand,] = useBrand();
+    const [, setProduct] = useProduct();
+    const [categoryItem,] = useState();
     const [brandItem, setBrandItem] = useState();
-    let categoryId;
-    let brandId;
     useEffect(() => {
-        category.map((item) => {
-            if (item.name === categoryItem) {
-                categoryId = item.id;
-            }
-        });
-        brand.map((item) => {
+        brand.forEach((item) => {
             if (item.name === brandItem) {
-                brandId = item.id;
+                setCurrentBrand(item);
             }
         });
-        fetchProductsFiltered(categoryId, brandId).then((data) => setProduct(data));
-    }, [categoryItem, brandItem]);
+        try {
+            fetchProductsFiltered(currentCategory.id, currentBrand.id).then((data) => setProduct(data));
+        } catch(e) {
+        }
+    }, [brandItem, currentBrand]);
+    console.log(currentCategory, currentBrand)
     function transformData() {
         const nonGroupsArray = [];
         category.forEach(item => {
-            if(item.parentId !== null) nonGroupsArray.push(item);
+            if (item.parentId !== null) nonGroupsArray.push(item);
         });
         category.forEach(item => {
-            if(item.parentId === null){
+            if (item.parentId === null) {
                 item.children = [];
                 nonGroupsArray.forEach(nonGroupItem => {
-                    if(nonGroupItem.parentId == item.id) {
+                    if (nonGroupItem.parentId == item.id) {
                         item.children.push(nonGroupItem);
                     }
                 });
             }
         })
     }
+
     transformData();
+
     return (
         <Box
             d="flex"
@@ -85,30 +88,15 @@ const Filter = () => {
                 </InputGroup>
             </Box>
 
-            <CategoriesMenu />
+            <CategoriesMenu/>
 
-            {/*<Select
-                placeholder="Choose type"
-                onChange={(e) => {
-                    setCategoryItem(e.target.value);
-                }}
-                w={{
-                    xl: "18rem",
-                    lg: "15rem",
-                    md: "12rem",
-                    sm: "100%",
-                }}
-                style={{
-                    cursor: "pointer",
-                }}
-            >
-                {category.map((item) =>
-                {if(item.parentId === null) return <option key={item.name}>{item.name}</option>   }
-                )}
-            </Select>*/}
             <Select
                 onChange={(e) => {
                     setBrandItem(e.target.value);
+                    if(e.target.value === ""){
+                        setCurrentBrand({id:undefined});
+                        fetchProductsFiltered().then((data) => setProduct(data));
+                    }
                 }}
                 placeholder="Choose brand"
                 w={{

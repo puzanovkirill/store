@@ -3,24 +3,29 @@ import {Collapse} from "react-collapse/lib/Collapse";
 import {fetchProductsFiltered} from "../http/productAPI";
 import {useCategory} from "../stores/CategoryStore";
 import {useProduct} from "../stores/ProductStore";
-
+import {useCurrentCategory} from "../stores/CurrentCategory";
+import {useCurrentBrand} from "../stores/CurrentBrand";
 
 const Content = (props) => {
-    const [product, setProduct] = useProduct();
-    const [categoryItem, setCategoryItem] = useState({});
+    const [currentBrand,] = useCurrentBrand();
+    const [currentCategory, setCurrentCategory] = useCurrentCategory();
+    const [, setProduct] = useProduct();
     const styles = {
         marginLeft: '40px'
     }
     useEffect(() => {
-        fetchProductsFiltered(categoryItem.id).then((data) => setProduct(data));
-    }, [categoryItem]);
+        try {
+            fetchProductsFiltered(currentCategory.id, currentBrand.id).then((data) => setProduct(data));
+        } catch (e) {
+        }
+    }, [currentCategory]);
     return (
         <div style={styles}>
             <div className="label"
+                 style={{cursor: 'pointer'}}
                  onClick={() => {
-                     setCategoryItem(props.props);
-                     if(Object.keys(categoryItem).length !== 0)
-                     fetchProductsFiltered(categoryItem.id).then((data) => setProduct(data));
+                     setCurrentCategory(props.props);
+                     console.log(currentCategory, currentBrand);
                  }}>
                 {props.props.name}
             </div>
@@ -28,25 +33,29 @@ const Content = (props) => {
 }
 
 const Group = (props) => {
+    const [currentBrand,] = useCurrentBrand();
+    const [currentCategory, setCurrentCategory] = useCurrentCategory();
     const [isOpened, setIsOpened] = useState(false);
     const p = props;
-    const [product, setProduct] = useProduct();
-    const [categoryItem, setCategoryItem] = useState({});
+    const [, setProduct] = useProduct();
     useEffect(() => {
-        fetchProductsFiltered(categoryItem.id).then((data) => setProduct(data));
-    }, [categoryItem]);
+        try {
+            fetchProductsFiltered(currentCategory.id, currentBrand.id).then((data) => setProduct(data));
+        } catch (e) {
+        }
+    }, [currentCategory]);
     const styles = {
         marginLeft: '20px'
     }
     return (
         <div>
             <div className="config" style={styles}>
-                <div className="label" onClick={(e) => {
-                    e.preventDefault();
-                    setCategoryItem(p.categoryItem);
-                    if(Object.keys(categoryItem).length !== 0)
-                    fetchProductsFiltered(categoryItem.id).then((data) => setProduct(data));
-                }}>
+                <div className="label"
+                     style={{cursor: 'pointer'}}
+                     onClick={(e) => {
+                         e.preventDefault();
+                         setCurrentCategory(p.categoryItem);
+                     }}>
                     {p.categoryItem.name}
                     <input
                         className="input"
@@ -74,7 +83,8 @@ const Group = (props) => {
 const CategoriesMenu = () => {
     const [isOpened, setIsOpened] = useState(false);
     const [category] = useCategory();
-    const [product, setProduct] = useProduct();
+    const [, setProduct] = useProduct();
+    const [, setCurrentCategory] = useCurrentCategory({id:undefined});
     return (
         <div>
             <div className="config">
@@ -90,7 +100,8 @@ const CategoriesMenu = () => {
                         onClick={(e) => e.stopPropagation()}
                         onChange={({target: {checked}}) => {
                             setIsOpened(checked);
-                            if(!checked){
+                            if (!checked) {
+                                setCurrentCategory();
                                 fetchProductsFiltered().then((data) => setProduct(data));
                             }
                         }}
