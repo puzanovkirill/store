@@ -21,10 +21,9 @@ const Filter = () => {
     const [category] = useCategory();
     const [brand,] = useBrand();
     const [, setProduct] = useProduct();
-    const [brandItem, setBrandItem] = useState();
+    const [brandItem, ] = useState();
     useEffect( () => {
         try {
-            console.log(currentBrand);
            fetchProductsFiltered(currentCategory.id, currentBrand).then((data) => setProduct(data));
         } catch(e) {
         }
@@ -38,7 +37,7 @@ const Filter = () => {
             if (item.parentId === null) {
                 item.children = [];
                 nonGroupsArray.forEach(nonGroupItem => {
-                    if (nonGroupItem.parentId == item.id) {
+                    if (nonGroupItem.parentId.toString() === item.id.toString()) {
                         item.children.push(nonGroupItem);
                     }
                 });

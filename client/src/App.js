@@ -11,16 +11,12 @@ import {
 import { useProduct } from './stores/ProductStore';
 import { useCategory } from './stores/CategoryStore';
 import { useBrand } from './stores/BrandStore';
-import {useCurrentCategory} from "./stores/CurrentCategory";
-import {useCurrentBrand} from "./stores/CurrentBrand";
 
 function App() {
   const [product, setProduct] = useProduct();
   const [category, setCategory] = useCategory();
   const [loading, setLoading] = useState(true);
   const [brand, setBrand] = useBrand();
-  const [, setCurrentCategory] = useCurrentCategory();
-  const [, setCurrentBrand] = useCurrentBrand();
   const handlePromise = () => {
     if (!product) {
       fetchProducts().then((data) => setProduct(data));

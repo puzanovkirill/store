@@ -8,7 +8,6 @@ import {
   Image,
   useToast,
 } from '@chakra-ui/react';
-import img from '../assets/default-product.png';
 import { MdAddShoppingCart } from 'react-icons/all';
 import { useParams } from 'react-router-dom';
 import { useProduct } from '../stores/ProductStore';
@@ -19,9 +18,9 @@ import { useBrand } from '../stores/BrandStore';
 
 const Product = () => {
   const [product] = useProduct();
-  const [user, setUser] = useUser();
-  const [brand, setBrand] = useBrand();
-  const [cart, setCart] = useCart();
+  const [user, ] = useUser();
+  const [brand,] = useBrand();
+  const [, setCart] = useCart();
   const { id } = useParams();
   const toast = useToast();
   const findCurrentProduct = () => {
@@ -31,7 +30,7 @@ const Product = () => {
   };
   const showToast = () => {
     let currentProduct;
-    product.map((product) => {
+    product.forEach((product) => {
       if (product.id.toString() === id.toString()) {
         return (currentProduct = product.name);
       }
@@ -57,7 +56,7 @@ const Product = () => {
             {findCurrentProduct()[0].name}
           </Heading>
           <Box fontSize="2em">
-            {brand.map((item) => {
+            {brand.forEach((item) => {
               if (
                 item.id.toString() ===
                 findCurrentProduct()[0].brandId.toString()
