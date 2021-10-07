@@ -50,13 +50,14 @@ const Group = (props) => {
         <div>
             <div className="config" style={styles}>
                 <div className="label"
-                     style={{cursor: 'pointer'}}
+                     style={{cursor: 'pointer', display: 'flex', alignItems: 'center'}}
                      onClick={(e) => {
                          e.preventDefault();
                          setCurrentCategory(p.categoryItem);
                      }}>
                     {p.categoryItem.name}
                     <input
+                        style={{width: '18px', height:'18px', marginLeft: '10px'}}
                         className="input"
                         type="checkbox"
                         checked={isOpened}
@@ -87,12 +88,14 @@ const CategoriesMenu = () => {
     return (
         <div>
             <div className="config">
-                <label
+                <div
                     className="label"
                     onClick={(e) => e.preventDefault()}
+                    style={{display: 'flex', alignItems: 'center'}}
                 >
                     Choose categories
                     <input
+                        style={{width: '18px', height:'18px', marginLeft: '10px'}}
                         className="input"
                         type="checkbox"
                         checked={isOpened}
@@ -106,7 +109,7 @@ const CategoriesMenu = () => {
                         }}
 
                     />
-                </label>
+                </div>
             </div>
             <Collapse isOpened={isOpened} hasNestedCollapse>
                 {category.map((item) => {
